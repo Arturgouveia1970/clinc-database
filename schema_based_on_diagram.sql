@@ -31,9 +31,26 @@ CREATE TABLE invoices_items(
     quantity INT,
     total_price decimal,
     invoice_id INT,
-    treatement_id INT,
+    treatment_id INT,
     FOREIGN KEY (invoice_id) REFERENCES invoice(id)
     ON UPDATE CASCADE,
-    FOREIGN KEY (treatement_id) REFERENCES treatements(id)
+    FOREIGN KEY (treatment_id) REFERENCES treatments(id)
     ON UPDATE CASCADE
+);
+
+
+--Create treatment table
+CREATE TABLE treatments(
+    id INT PRIMARY KEY ALWAYS GENERATED AS IDENTITY NOT NULL,
+    type varchar,
+    name varchar
+);
+
+--Many to many relationship between medical_histories and treatments
+CREATE TABLE medical_histories_treatments (
+    id INT PRIMARY KEY ALWAYS GENERATED AS IDENTITY NOT NULL,
+    medical_histories_id int,
+    treatment_id int,
+    FOREIGN KEY (medical_histories_id) REFERENCES medical_histories(id) ON UPDATE CASCADE,
+    FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON UPDATE CASCADE
 );
