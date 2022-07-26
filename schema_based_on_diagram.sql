@@ -54,3 +54,10 @@ CREATE TABLE medical_histories_treatments (
     FOREIGN KEY (medical_histories_id) REFERENCES medical_histories(id) ON UPDATE CASCADE,
     FOREIGN KEY (treatment_id) REFERENCES treatments(id) ON UPDATE CASCADE
 );
+
+CREATE INDEX ON medical_histories (patient_id);
+CREATE INDEX ON invoices (medical_histories_id);
+CREATE INDEX ON invoices_items (invoice_id);
+CREATE INDEX ON invoices_items (treatment_id);
+CREATE INDEX ON medical_histories_treatments (medical_histories_id);
+CREATE INDEX ON medical_histories_treatments (treatment_id);
